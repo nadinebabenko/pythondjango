@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{%for person in sorted_age_people%}
+    <ul>
+        <li>Name: {{person.name}}</li>
+        <li>Age: {{person.age}}</li>
+        <li>Country: {{person.country}}</li>
+    </ul>
+<hr>
+{%endfor%}
+
+
+</body>
+</html>
