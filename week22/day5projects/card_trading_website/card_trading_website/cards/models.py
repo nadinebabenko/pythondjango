@@ -1,8 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, Permission,
+from django.contrib.auth.models import AbstractUser, Permission, Group, User
 from django.utils.translation import gettext as _
 
 # Create your models here.
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # add additional fields for the user profile here
 class User(AbstractUser):
     amount_of_money = models.IntegerField(default=1000)
     points = models.IntegerField(default=0)
