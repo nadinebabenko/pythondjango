@@ -1,53 +1,57 @@
 import requests
-import json
 import random
-from cards.models import Card, User
+from django.core.management.base import BaseCommand
+from datetime import datetime
+from cards.models import Card
 
 
+class Command(BaseCommand):
+    help = 'Populates the Card model with data from the Harry Potter API'
 
-API_URL = 'https://www.potterapi.com/v1/cards'
-DB_PATH = 'harry_potter_cards/db.mysql'
+    def handle(self, *args, **kwargs):
+        # Harry Potter API endpoint
+        api_url = "https://hp-api.onrender.com/api/characters"
 
-def fetch_data():
-    response = requests.get('https://hp-api.onrender.com/api/characters')
-    return json.loads(response.text)
+        # Fetch data from the API
+        response = requests.get(api_url)
+        if response.status_code != 200:
+            self.stdout.write(self.style.ERROR('Failed to fetch data from Harry Potter API'))
+            return
 
-def parse_data(data):
-    cards = []
-    for card_data in data:
-        card = {
-            'name': card_data['name'],
-            'type': card_data['type'],
-            'rarity': card_data['rarity'],
-            'image_url': card_data['image_url'],
-            'card_id': card_data['_id'],
-            'xp': random.randint(1, 10),
-            'price': random.randint(200, 2000),
-            'current_owner': None,
-            'previous_owner': None,
-        }
-        cards.append(card)
-    return cards
+        characters = response.json()
 
-def populate_cards(cards):
-    for card in cards:
-        Card.objects.create(
-            name=card['name'],
-            type=card['type'],
-            rarity=card['rarity'],
-            image_url=card['image_url'],
-            card_id=card['card_id'],
-            xp=card['xp'],
-            price=card['price'],
-            current_owner=card['current_owner'],
-            previous_owner=card['previous_owner'],
-        )
+        # Clear existing cards
+        Card.objects.all().delete()
 
-def create_user():
-    user = User.objects.create(balance=1000)
-    return user
+        # Populate the Card model with the retrieved card information
+        for character in characters:
+            name_character = character['name']
+            species = character.get('species', '')
+            house = character.get('house', '')
+            image_url = character.get('image', '')
+            date_of_birth = character.get('dateOfBirth', '')
+            patronus = character.get('patronus', '')
+            price = random.randint(200, 2000)
+            xp_points = random.randint(1, 10)
+            current_owner = None
+            previous_owner = None
 
-data = fetch_data()
-cards = parse_data(data)
-populate_cards(cards)
-user = create_user()
+            if date_of_birth:
+                date_of_birth = datetime.strptime(date_of_birth, "%d-%m-%Y").strftime("%Y-%m-%d")
+
+            card = Card(
+                name_character=name_character,
+                species=species,
+                house=house,
+                image_url=image_url,
+                date_of_birth=date_of_birth,
+                patronus=patronus,
+                price=price,
+                xp_points=xp_points,
+                current_owner=current_owner,
+                previous_owner=previous_owner
+            )
+
+            card.save()
+
+        self.stdout.write(self.style.SUCCESS('Successfully populated cards from the Harry Potter API'))
