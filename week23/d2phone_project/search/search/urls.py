@@ -21,5 +21,7 @@ from  info  import views
 urlpatterns = [
     path('person/<str:number>/', views.display_person_by_phonenumber, name='personbyphone'),
     path('persons/<str:name>/', views.display_person_by_name, name='personsbyname'),
-    path('person-form/', views.person_form, name='personform'),
+    path('persons/', views.display_all_persons, name='allpersons'),
+    path('addperson/', views.add_person, name='addperson'),
 ]
+ 
