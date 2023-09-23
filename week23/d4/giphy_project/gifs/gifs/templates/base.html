@@ -1,0 +1,32 @@
+{% block content %}
+  <h1>{{ gif.title }}</h1>
+  <img src="{{ gif.url }}" alt="{{ gif.title }}">
+  <p>Uploaded by {{ gif.uploader_name }} on {{ gif.created_at }}</p>
+  <p>Categories: {{ gif.categories.all|join:', ' }}</p>
+  <p>Likes: {{ gif.likes }}</p>
+  <button id="like-btn" onclick="incrementLikes()">Like</button>
+  <button id="dislike-btn" onclick="decrementLikes()">Dislike</button>
+  <script>
+    function incrementLikes() {
+      fetch('/gifs/{{ gif.id }}/like/', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('like-btn').disabled = true;
+          document.getElementById('dislike-btn').disabled = false;
+          document.querySelector('p#likes').textContent = data.likes;
+        })
+        .catch(error => console.error(error));
+    }
+
+    function decrementLikes() {
+      fetch('/gifs/{{ gif.id }}/dislike/', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('like-btn').disabled = false;
+          document.getElementById('dislike-btn').disabled = true;
+          document.querySelector('p#likes').textContent = data.likes;
+        })
+        .catch(error => console.error(error));
+    }
+  </script>
+{% endblock %}

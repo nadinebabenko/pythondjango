@@ -1,0 +1,14 @@
+{% block content %}
+  <h1>Popular Gifs</h1>
+  <ul>
+    {% for gif in gifs %}
+      <li>
+        <h2>{{ gif.title }}</h2>
+        <img src="{{ gif.url }}" alt="{{ gif.title }}">
+        <p>Likes: {{ gif.likes }}</p>
+      </li>
+    {% empty %}
+      <li>No popular gifs found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
