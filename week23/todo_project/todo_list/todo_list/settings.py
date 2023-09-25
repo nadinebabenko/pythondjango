@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todos',
+    ''
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'todo_list.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'todo_app_xpp', 
+        'NAME': 'todo_app_xp1', 
         'USER': 'root',  #postgres
         'PASSWORD': '070894', 
         'HOST': 'localhost', #localhost

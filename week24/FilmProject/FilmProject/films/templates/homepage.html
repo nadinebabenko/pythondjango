@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Films</h1>
+  {% for film in films %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ film.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ film.director }}</h6>
+        <p class="card-text">{{ film.release_date }}</p>
+        <h6 class="card-subtitle mb-2 text-muted">Reviews:</h6>
+        <ul>
+          {% for review in film.reviews.all %}
+            <li>{{ review.rating }} - {{ review.comment }}</li>
+          {% empty %}
+            <li>No reviews yet.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

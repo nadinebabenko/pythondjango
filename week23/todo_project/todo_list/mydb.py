@@ -6,5 +6,5 @@ database=mysql.connector.connect(
 ) #
 
 cursorObject =  database.cursor()
-cursorObject.execute("CREATE DATABASE  todo_app_xpp")
+cursorObject.execute("CREATE DATABASE  todo_app_xp1")
 print("Database created")
