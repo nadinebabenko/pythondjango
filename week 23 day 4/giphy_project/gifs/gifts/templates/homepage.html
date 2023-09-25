@@ -1,0 +1,12 @@
+{% block content %}
+  <h1>All GIFs</h1>
+  <form method="get">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+    {% for gif in gifs %}
+      <li><img src="{{ gif.url }}" alt="{{ gif.title }}"></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
