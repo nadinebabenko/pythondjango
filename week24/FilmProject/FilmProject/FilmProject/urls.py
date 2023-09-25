@@ -16,6 +16,7 @@ Including another URLconf
 """
  
 from django.urls import path
+from . import views
 from .views import    HomePageView, FilmCreateView, DirectorCreateView,ReviewCreateView
 
 urlpatterns = [
@@ -23,6 +24,10 @@ urlpatterns = [
     path('addFilm/', FilmCreateView.as_view(), name='addFilm'),
     path('addDirector/', DirectorCreateView.as_view(), name='addDirector'),
     path('addReview/', ReviewCreateView.as_view(), name='add_review'),
+    path('signup/', views.signup, name='signup'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('profile/<int:user_id>/', views.profile, name='profile'),
 ]
 
  

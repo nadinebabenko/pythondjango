@@ -35,3 +35,11 @@ def home(request):
     films = Film.objects.all()
     context = {'films': films}
     return render(request, 'homepage.html', context)
+
+ 
+def homepage(request):
+   
+    films = Film.objects.all()
+
+    # Render the homepage 
+    return render(request, 'homepage.html', {'films': films})
