@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game</title>
+  </head>
+  <body>
+    <h1>Game Interface</h1>
+    <p>Shuffled Word: {{ shuffled_word }}</p>
+    <form method="post">
+      {% csrf_token %}
+      <label for="user_input">User Input:</label>
+      <input type="text" id="user_input" name="user_input">
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
