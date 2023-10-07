@@ -17,7 +17,9 @@ Including another URLconf
  
 from django.urls import path
 from . import views
-from .views import    HomePageView, FilmCreateView, DirectorCreateView,ReviewCreateView
+from  films.views import HomePageView, FilmCreateView, DirectorCreateView, ReviewCreateView, FilmDeleteView, FavouriteFilmView, FilmDetailView
+ 
+
 
 urlpatterns = [
     path('homepage/', HomePageView.as_view(), name='homepage'),
@@ -27,7 +29,12 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    path('profile/<int:user_id>/', views.profile, name='profile'),
+    path('profile/<int:user_id>/', views.profile, name='profile'),     
+    path('film/<int:pk>/delete/', FilmDeleteView.as_view(), name='delete_film'),
+    path('films/<int:film_id>/favorite/', FavouriteFilmView.as_view(), name='favorite_film'),
+     path('films/<int:pk>/', FilmDetailView.as_view(), name='film_detail'),
+    path('films/<int:film_id>/favorite/', FavouriteFilmView.as_view(), name='favorite_film'),
+]
 ]
 
  

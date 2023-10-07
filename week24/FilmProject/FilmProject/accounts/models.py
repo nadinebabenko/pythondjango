@@ -23,6 +23,7 @@ class CustomUser(AbstractBaseUser):
     last_name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    favorite_films = models.ManyToManyField('Film', blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']

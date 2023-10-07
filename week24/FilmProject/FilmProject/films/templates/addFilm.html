@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Add Film</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <h2>Producers</h2>
+    {{ producer_formset.management_form }}
+    {% for producer_form in producer_formset %}
+      {{ producer_form.as_p }}
+    {% endfor %}
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}
