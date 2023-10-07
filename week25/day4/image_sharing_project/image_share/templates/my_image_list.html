@@ -1,0 +1,14 @@
+{% block content %}
+  <h2>My Images</h2>
+  <ul>
+    {% for image in images %}
+      <li>
+        <h3>{{ image.title }}</h3>
+        <img src="{{ image.image.url }}" alt="{{ image.title }}">
+        <p>Uploaded by: {{ image.user }}</p>
+      </li>
+    {% empty %}
+      <li>No images found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
