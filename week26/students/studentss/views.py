@@ -9,9 +9,12 @@ from .serializers import StudentSerializer
 # Create your views here.
 @api_view(['GET', 'POST'])
 def student_list(request):
+    date_joined = request.query_params.get('date_joined', None)
+    students = Student.objects.all()
+    if date_joined is not None:
+        students = students.filter(date_joined=date_joined)
+    serializer = StudentSerializer(students, many=True)
     if request.method == 'GET':
-        students = Student.objects.all()
-        serializer = StudentSerializer(students, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = StudentSerializer(data=request.data)
