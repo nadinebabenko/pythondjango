@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ book.title }}</h1>
+  <p>Author: {{ book.author }}</p>
+  <p>Published: {{ book.published_date }}</p>
+  <p>ISBN: {{ book.isbn }}</p>
+  <p>Number of reviews: {{ num_reviews }}</p>
+  <p>Average rating: {{ avg_rating }}</p>
+  <a href="{% url 'write_review' book.id %}">Write a review</a>
+  <h2>Reviews</h2>
+  {% if reviews %}
+    <ul>
+      {% for review in reviews %}
+        <li>{{ review.user }} rated it {{ review.rating }} and said "{{ review.review_text }}"</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No reviews yet.</p>
+  {% endif %}
+{% endblock %}
