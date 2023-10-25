@@ -1,0 +1,25 @@
+echo '<html>
+  <% include partials/head %>
+  <body>
+    <% include partials/header %>
+    <h1>Search</h1>
+    <form>
+      <div class="form-group">
+        <label for="title">Search by title:</label>
+        <input type="text" class="form-control" id="title" name="title">
+      </div>
+      <div class="form-group">
+        <label for="category">Search by category:</label>
+        <select class="form-control" id="category" name="category">
+          <option value="">Select a category</option>
+          <option value="category1">Category 1</option>
+          <option value="category2">Category 2</option>
+          <option value="category3">Category 3</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <% include partials/posts %>
+    <% include partials/footer %>
+  </body>
+</html>' > public/pages/search.ejs

@@ -1,0 +1,9 @@
+echo '<div class="posts">
+    <% posts.forEach(post => { %>
+      <div class="post">
+        <a href="<%= post.link %>"><%= post.title %></a>
+        <p><%= post.pubDate %> | <%= post.creator %> | <%= post.categories.join(", ") %></p>
+        <p><%= post.contentSnippet %></p>
+      </div>
+    <% }) %>
+  </div>' > public/partials/posts.ejs
